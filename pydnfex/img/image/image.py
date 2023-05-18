@@ -1,3 +1,5 @@
+import os
+
 from pydnfex.hard_code import *
 from pydnfex.util import image as image_util
 from pydnfex.util.io_helper import IOHelper
@@ -85,3 +87,9 @@ class Image:
         image = image_util.load_raw(raw_data, self.w, self.h)
         [data, w, h] = FormatConvertor.from_image(image, image_format)
         self._data = data
+
+    def save_image(self, path: os.PathLike):
+        raw_data = FormatConvertor.to_raw(self.data, self.format)
+        image = image_util.load_raw(raw_data, self.w, self.h)
+        with open(path, 'wb') as f:
+            image.save(f)

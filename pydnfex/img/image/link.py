@@ -1,3 +1,4 @@
+import os
 from typing import TYPE_CHECKING
 
 from pydnfex.hard_code import IMAGE_FORMAT_LINK
@@ -56,3 +57,8 @@ class ImageLink:
             final = final.image
 
         return final
+
+    def save_image(self, path: os.PathLike):
+        from pydnfex.img.image import Image
+        if isinstance(self._image, Image):
+            self._image.save_image(path)
